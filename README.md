@@ -71,3 +71,24 @@ Feeling uninspired by the portfolio? Here's a list of cool portfolios I found af
 * <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
 * <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
 * <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+
+Steps to run:
+1. go to file location
+2. right click on index.html and choose open with Chrome
+
+
+For changePizzaSizes, I took out the function that determines dx, since it creates a force synchronized layout by calling offsetWidth before changing styles. Rather, I made the size changes a set of options of fixed sizes, so when the user chooses any size, the browser doesn't have to query the width, and it can just set the size directly.
+
+For updatePositions, I first changed querySelectorAll to getElementsByClassName and getElementById because the getElement methods are faster than querySelectorAll. Then I took out the document.body.scrollTop code from the for loop, since it only needs to be run once before the loop, and leaving it in the loop takes a lot of time and will also cause forced synchronized layout. Next, I changed style.left to style.transform, since it's faster to change the position of a pizza using translateX. 
+
+I decreased the number of times a mover pizza is appended to the DOM from 200 to 30, since 200 pizzas won't show up on the screen. Also, I resized the mover pizza image to 100px x 73px so the image doesn't have to be resized in the browser.
+
+Also, I added backface-visibility: hidden; to the mover pizzas' CSS properties, since not showing the backface of a mover will increase speed.
+
+Lastly, I took out some variable declarations from inside for loops to outside the loops when possible.
+
+References:
+http://www.w3schools.com/cssref/css3_pr_backface-visibility.asp
+https://github.com/udacity/fend-office-hours/blob/master/Web%20Optimization/Effective%20Optimizations%20for%2060%20FPS/main.js
+https://plus.google.com/events/c8eah6f0d0t9eretebpm7dqi0ok?authkey=CKaNhtb0quvqKA
+https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
